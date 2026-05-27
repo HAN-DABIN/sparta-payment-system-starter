@@ -3,6 +3,7 @@ package com.sparta.paymentsystem.domain.cart.service;
 import com.sparta.paymentsystem.domain.cart.entity.CartItem;
 import com.sparta.paymentsystem.domain.cart.dto.CartItemResponse;
 import com.sparta.paymentsystem.domain.cart.repository.CartItemRepository;
+import com.sparta.paymentsystem.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,7 @@ public class CartService {
     public void removeItem(Long memberId, Long itemId) {
         int deleted = cartItemRepository.deleteByIdAndMember_Id(itemId, memberId);
         if (deleted == 0) {
-            throw new RuntimeException("장바구니 항목을 찾을 수 없습니다.");
+            throw new NotFoundException("장바구니 항목을 찾을 수 없습니다.");
         }
     }
 
